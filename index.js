@@ -1,69 +1,60 @@
-// MODEL ////////////////////////////////////////////////////////////////////////////////
-const app = document.getElementById('app');
-const firstName = document.getElementById("first-name");
-const lastName = document.getElementById("last-name");
-const email = document.getElementById("email");
-const password = document.getElementById("password");
+document.addEventListener("DOMContentLoaded", function () {
+    const firstName = document.getElementById("first-name");
+    const lastName = document.getElementById("last-name");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirm-password");
 
-const nameRegex = /^[a-zA-Z]{2,}/;
-const emailRegex = /^[a-zA-Z0-9._-]@[a-zA-Z0-9._-]\./
+    const form = document.getElementById("my-form");
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        validate();
+    });
 
+    function validate() {
+        const firstNameValue = firstName.value.trim();
+        const lastNameValue = lastName.value.trim();
+        const emailValue = email.value.trim();
+        const passwordValue = password.value;
+        const confirmPasswordValue = confirmPassword.value;
 
-// VIEW /////////////////////////////////////////////////////////////////////////////////
-updateView()
-function updateView() {
-    let html = /*HTML*/ `
-        <form style="display: flex; flex-direction: column; width: 200px;">
-            <h4 style="margin: 0;">Navn</h4>
-            <input id="first-name" placeholder="navn" type="text" />
-            <input id="last-name" placeholder="etternavn" type="text" />
-            <h4 style="margin: 0;">Email</h4>
-            <input id="email" placeholder="email" type="text" />
-            <h4 style="margin: 0;">Passord</h4>
-            <input id="password" placeholder="passord" type="password" />
-            <input id="confirm-password" placeholder="bekreft passord" type="password" />
-            <input onclick="validate()" type="submit">
-        </form>
-`
-    app.innerHTML = html
-}
+        const nameRegex = /^[a-zA-Z]{2,}$/;
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$/;
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
 
-
-
-// CONTROLLER ///////////////////////////////////////////////////////////////////////////
-function validate() {
-
-}
-
-
-
-
-
+        if (!nameRegex.test(firstNameValue)) {
+            alert("First name must contain only letters and be at least 2 characters long");
+            return false;
+        }
+        if (!nameRegex.test(lastNameValue)) {
+            alert("Last name must contain only letters and be at least 2 characters long");
+            return false;
+        }
+        if (!emailRegex.test(emailValue)) {
+            alert("Invalid email address");
+            return false;
+        }
+        if (!passwordRegex.test(passwordValue)) {
+            alert("Password must contain at least 8 characters including one uppercase letter and one digit");
+            return false;
+        }
+        if (passwordValue !== confirmPasswordValue) {
+            alert("Passwords do not match");
+            return false;
+        }
+        alert("Form submitted successfully!");
+        return true;
+    }
+});
 
 // Implementer validering ved hjelp av Javascript og Regular Expressions (RegEx) for å
 // sikre at følgende kriterier er oppfylt:
-//
-// 1. Fornavn og etternavn må inneholde minst to bokstaver, og
-//    kan bare inneholde bokstaver (ingen tall eller spesialtegn)
-// 2. E-postadressen må følge et
-//    gylding e-postformat (f.eks: "navn@domene.com")
-// 3. Passordet må være minst 8 tegn langt,
-//    inneholde minst én stor bokstav, og
-//    minst ett tall.
+
 // 4. Passord og bekreft passord må være like.
 //    Du kan bruke .match() eller .test(), og legge inn RegEx stringen som argument.
 
 
 // Her er en rask forklaring på RegEx.
-//
-// 1. ^ betyr at matchen må starte fra begynnelsen av teksten.
-//
-// 2. a-z er en karakterklasse som matcher en hvilken som helst engelsk bokstav som er liten.
-//
-// 3. A-Z er en karakterklasse som matcher en hvilken som helst engelsk bokstav som er stor.
-//
-// 4. a-zA-Z er de to overnevnte slått sammen.
-//
 // 5. 0-9 er en karakterklasse som matcher tallene 0-9.
 //    Så med det kan vi utvide den over til a-zA-Z0-9 for å matche alle små og
 //    store bokstaver samt tall. Du kan også legge til f.eks. bindestrek,

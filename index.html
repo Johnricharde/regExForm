@@ -4,14 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Document</title>
-
-    <link href="styles.css" rel="stylesheet">
 </head>
 
 <body>
     <div id="app">
+        <form id="my-form" style="display: flex; flex-direction: column; width: 200px; margin: auto; margin-top: 50px;">
+            <h4 style="margin: 0;">Navn</h4>
+            <input id="first-name" placeholder="navn" type="text" />
+            <input id="last-name" placeholder="etternavn" type="text" />
+            <h4 style="margin: 0;">Email</h4>
+            <input id="email" placeholder="email" type="text" />
+            <h4 style="margin: 0;">Passord</h4>
+            <input id="password" placeholder="passord" type="password" />
+            <input id="confirm-password" placeholder="bekreft passord" type="password" />
+            <input type="submit">
+        </form>
     </div>
 
     <script src="index.js"></script>
